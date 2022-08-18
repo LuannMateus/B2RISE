@@ -1,0 +1,14 @@
+# VSCODE
+.vscode
+./vscode
+./vscode/**
+
+# NODE MODULES
+node_modules
+./node_modules
+./node_modules/**
+
+# JEST
+coverage
+./coverage
+./coverage/**
