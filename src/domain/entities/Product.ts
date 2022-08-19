@@ -1,9 +1,11 @@
+import { Decimal } from '@prisma/client/runtime';
+
 export default class Product {
   public id: string;
 
   public title: string;
 
-  public price: number;
+  public price: Decimal;
 
   public description: string;
 
@@ -14,7 +16,7 @@ export default class Product {
   constructor(
     id: string,
     title: string,
-    price: number,
+    price: Decimal,
     description: string,
     category: string,
     image: string
