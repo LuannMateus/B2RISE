@@ -17,3 +17,13 @@ coverage
 build
 ./build
 ./build/**
+
+# ENV
+.env
+
+# YARN
+yarn-error.log
+
+# DOCKER
+.docker/pg_data
+.docker/pg_data/**
