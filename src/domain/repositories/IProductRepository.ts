@@ -1,7 +1,13 @@
 import Product from 'domain/entities/Product';
 
+export type ProductFilterProperties = {
+  category: string;
+  title: string;
+};
 export interface IProductRepository {
   findAll(): Promise<Product[]>;
+
+  findManyByFilter(filter: ProductFilterProperties): Promise<Product[]>;
 
   findById(id: string): Promise<Product>;
 
