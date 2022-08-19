@@ -1,4 +1,8 @@
-import { NotFoundError as PrismaNotFoundError } from '@prisma/client/runtime';
+import {
+  NotFoundError as PrismaNotFoundError,
+  PrismaClientKnownRequestError,
+  PrismaClientValidationError as PrismaBadRequestError,
+} from '@prisma/client/runtime';
 
 import Product from '../../domain/entities/Product';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
@@ -16,7 +20,7 @@ export class ProductRepository implements IProductRepository {
     } catch (error) {
       if (error instanceof PrismaNotFoundError) {
         throw new NotFoundError();
-      } else if (error instanceof BadRequestError) {
+      } else if (error instanceof PrismaBadRequestError) {
         throw new BadRequestError();
       } else {
         throw new ServerError();
@@ -32,7 +36,7 @@ export class ProductRepository implements IProductRepository {
     } catch (error) {
       if (error instanceof PrismaNotFoundError) {
         throw new NotFoundError();
-      } else if (error instanceof BadRequestError) {
+      } else if (error instanceof PrismaBadRequestError) {
         throw new BadRequestError();
       } else {
         throw new ServerError();
@@ -40,13 +44,64 @@ export class ProductRepository implements IProductRepository {
     }
   }
 
-  save(): Promise<void> {
-    throw new Error('Method not implemented.');
+  async save(product: Product): Promise<void> {
+    try {
+      await prisma.product.create({ data: product });
+    } catch (error) {
+      if (error instanceof PrismaNotFoundError) {
+        throw new NotFoundError();
+      } else if (error instanceof PrismaBadRequestError) {
+        throw new BadRequestError();
+      } else {
+        throw new ServerError();
+      }
+    }
   }
-  updateById(): Promise<Product> {
-    throw new Error('Method not implemented.');
+
+  async updateById(id: string, product: Product): Promise<Product> {
+    try {
+      return await prisma.product.update({
+        data: product,
+        where: { id },
+      });
+    } catch (error) {
+      if (error instanceof PrismaNotFoundError) {
+        throw new NotFoundError();
+      } else if (error instanceof PrismaBadRequestError) {
+        throw new BadRequestError();
+      } else if (error instanceof PrismaClientKnownRequestError) {
+        switch (error.code) {
+          case 'P2025':
+            throw new NotFoundError('Product does not exists!');
+          default:
+            throw new ServerError();
+        }
+      } else {
+        throw new ServerError();
+      }
+    }
   }
-  deleteById(): Promise<void> {
-    throw new Error('Method not implemented.');
+
+  async deleteById(id: string): Promise<void> {
+    try {
+      await prisma.product.delete({
+        where: { id },
+      });
+    } catch (error) {
+      if (error instanceof PrismaNotFoundError) {
+        throw new NotFoundError();
+      } else if (error instanceof PrismaBadRequestError) {
+        throw new BadRequestError();
+      } else if (error instanceof PrismaClientKnownRequestError) {
+        switch (error.code) {
+          case 'P2025':
+            throw new NotFoundError('Product does not exists!');
+          default:
+            throw new ServerError();
+        }
+      } else {
+        throw new ServerError();
+      }
+    }
   }
 }

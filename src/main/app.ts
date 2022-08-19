@@ -16,7 +16,7 @@ export default class App {
   }
 
   private middleware(): void {
-    console.info('TODO');
+    this.app.use(express.json());
   }
 
   private routes(): void {
