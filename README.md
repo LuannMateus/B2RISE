@@ -1,4 +1,4 @@
-# 🚀 Backend Challenge - E-commerce
+# 🚀 Backend Challenge - E-commerce API
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
@@ -26,9 +26,9 @@ Bem-vindo(a) ao meu projeto do desafio Backend!
 O desafio será implementar uma **API** de e-commerce para venda de camisetas, canecas e adesivos que deverá ter as seguintes funcionalidades:
 
 - [x] Gerenciamento de produtos (criação, deleção, atualização)
-- [ ] Busca de produtos com paginação e com a possibilidade de utilização de filtros
+- [x] Busca de produtos com paginação e com a possibilidade de utilização de filtros
 - [x] Busca por de produto por id
-- [ ] Busca de produtos por categoria
+- [x] Busca de produtos por categoria
 
 Também seria muito legal se você também implementasse:
 
