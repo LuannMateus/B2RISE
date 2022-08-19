@@ -7,7 +7,7 @@ export interface IProductRepository {
 
   save(product: Product): Promise<void>;
 
-  updateById(id: string): Promise<Product>;
+  updateById(id: string, product: Product): Promise<Product>;
 
   deleteById(id: string): Promise<void>;
 }
