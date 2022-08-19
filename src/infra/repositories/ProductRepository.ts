@@ -49,11 +49,17 @@ export class ProductRepository implements IProductRepository {
 
   async findManyByFilter(filter: ProductFilterProperties): Promise<Product[]> {
     try {
+      const { page, limit } = filter;
+
+      const pagination = page * limit - limit;
+
       return await prisma.product.findMany({
         where: {
           category: filter.category || undefined,
           title: filter.title || undefined,
         },
+        skip: +pagination,
+        take: +limit,
       });
     } catch (error) {
       if (error instanceof PrismaNotFoundError) {

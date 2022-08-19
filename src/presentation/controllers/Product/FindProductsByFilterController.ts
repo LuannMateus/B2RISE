@@ -10,15 +10,22 @@ export default class FindProductsByFilterController {
     const productRepository = new ProductRepository();
     const findProductByCategory = new FindProductsByFilter(productRepository);
 
-    const { category, title } = req.query as ProductFilterProperties;
+    const { category, title, page, limit } = Object.create(
+      req.query
+    ) as ProductFilterProperties;
 
     try {
-      if (!category && !title)
-        throw new BadRequestError('Inform at least one filter!');
+      if (page !== null && page !== undefined)
+        if (page <= 0) throw new BadRequestError('Page filter is invalid');
+
+      if (limit !== null && limit !== undefined)
+        if (limit < 0) throw new BadRequestError('Limit filter is invalid');
 
       const products = await findProductByCategory.execute({
         category,
         title,
+        limit,
+        page,
       });
 
       return res.status(200).json(products);

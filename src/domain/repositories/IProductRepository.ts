@@ -3,6 +3,11 @@ import Product from 'domain/entities/Product';
 export type ProductFilterProperties = {
   category: string;
   title: string;
+} & ProductPaginationProperties;
+
+type ProductPaginationProperties = {
+  page: number;
+  limit: number;
 };
 export interface IProductRepository {
   findAll(): Promise<Product[]>;
