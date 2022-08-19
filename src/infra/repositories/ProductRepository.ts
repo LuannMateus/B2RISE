@@ -5,7 +5,10 @@ import {
 } from '@prisma/client/runtime';
 
 import Product from '../../domain/entities/Product';
-import { IProductRepository } from '../../domain/repositories/IProductRepository';
+import {
+  IProductRepository,
+  ProductFilterProperties,
+} from '../../domain/repositories/IProductRepository';
 import { prisma } from '../../infra/database/prisma';
 import {
   BadRequestError,
@@ -32,6 +35,25 @@ export class ProductRepository implements IProductRepository {
     try {
       return await prisma.product.findUniqueOrThrow({
         where: { id },
+      });
+    } catch (error) {
+      if (error instanceof PrismaNotFoundError) {
+        throw new NotFoundError();
+      } else if (error instanceof PrismaBadRequestError) {
+        throw new BadRequestError();
+      } else {
+        throw new ServerError();
+      }
+    }
+  }
+
+  async findManyByFilter(filter: ProductFilterProperties): Promise<Product[]> {
+    try {
+      return await prisma.product.findMany({
+        where: {
+          category: filter.category || undefined,
+          title: filter.title || undefined,
+        },
       });
     } catch (error) {
       if (error instanceof PrismaNotFoundError) {
