@@ -25,9 +25,9 @@ Bem-vindo(a) ao meu projeto do desafio Backend!
 
 O desafio será implementar uma **API** de e-commerce para venda de camisetas, canecas e adesivos que deverá ter as seguintes funcionalidades:
 
-- [ ] Gerenciamento de produtos (criação, deleção, atualização)
+- [x] Gerenciamento de produtos (criação, deleção, atualização)
 - [ ] Busca de produtos com paginação e com a possibilidade de utilização de filtros
-- [ ] Busca por de produto por id
+- [x] Busca por de produto por id
 - [ ] Busca de produtos por categoria
 
 Também seria muito legal se você também implementasse:
