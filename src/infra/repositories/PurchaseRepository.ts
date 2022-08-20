@@ -9,6 +9,7 @@ import PurchaseOrderItem from '../../domain/entities/PurchaseOrderItem';
 import {
   IPurchaseRepository,
   Purchase,
+  PurchaseFilter,
 } from '../../domain/repositories/IPurchaseRepository';
 import { prisma } from '../../infra/database/prisma';
 import {
@@ -35,7 +36,10 @@ export class PurchaseRepository implements IPurchaseRepository {
     throw new Error('Method not implemented.');
   }
 
-  async findPurchaseHistory(userId: string): Promise<PurchaseOrder[]> {
+  async findPurchaseHistoryByUser(
+    userId: string,
+    filter: PurchaseFilter
+  ): Promise<PurchaseOrder[]> {
     try {
       return await prisma.purchaseOrder.findMany({
         include: {
@@ -43,6 +47,19 @@ export class PurchaseRepository implements IPurchaseRepository {
         },
         where: {
           user_id: userId,
+          AND: {
+            purchase_order_item: {
+              every: {
+                product: {
+                  title: filter.title || undefined,
+                  category: filter.category || undefined,
+                },
+              },
+            },
+          },
+        },
+        orderBy: {
+          date: 'desc',
         },
       });
     } catch (error) {

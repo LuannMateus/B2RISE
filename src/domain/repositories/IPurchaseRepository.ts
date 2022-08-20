@@ -8,12 +8,23 @@ export type Purchase = {
   quantity: number;
 };
 
+export type PurchaseFilter = {
+  category: string;
+  title: string;
+  day: number;
+  month: number;
+  year: number;
+};
+
 export interface IPurchaseRepository {
   findAll(): Promise<PurchaseOrderItem[]>;
 
   findById(id: string): Promise<PurchaseOrderItem>;
 
-  findPurchaseHistory(userId: string): Promise<PurchaseOrder[]>;
+  findPurchaseHistoryByUser(
+    userId: string,
+    filter: PurchaseFilter
+  ): Promise<PurchaseOrder[]>;
 
   save(purchase: PurchaseOrderItem): Promise<void>;
 

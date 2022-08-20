@@ -1,20 +1,31 @@
 import { Request, Response } from 'express';
 
-import { FindPurchaseHistory } from '../../../domain/usecases/Purchase/FindPurchaseHistory';
+import { PurchaseFilter } from '../../../domain/repositories/IPurchaseRepository';
+import { FindPurchaseHistoryByUser } from '../../../domain/usecases/Purchase/FindPurchaseHistoryByUser';
 import { PurchaseRepository } from '../../../infra/repositories/PurchaseRepository';
 import { BadRequestError, NotFoundError } from '../../errors';
 
-export default class FindPurchaseHistoryController {
+export default class FindPurchaseHistoryByUserController {
   async handle(req: Request, res: Response) {
     const purchaseRepository = new PurchaseRepository();
-    const findPurchaseHistoryUsecase = new FindPurchaseHistory(
+    const findPurchaseHistoryByUserUsecase = new FindPurchaseHistoryByUser(
       purchaseRepository
     );
 
     const { id: userId } = req.params as { id: string };
 
+    const { category, title, day, month, year } = Object.create(
+      req.query
+    ) as PurchaseFilter;
+
     try {
-      const purchases = await findPurchaseHistoryUsecase.execute(userId);
+      const purchases = await findPurchaseHistoryByUserUsecase.execute(userId, {
+        category,
+        title,
+        day,
+        month,
+        year,
+      });
 
       return res.status(200).json(purchases);
     } catch (error) {
