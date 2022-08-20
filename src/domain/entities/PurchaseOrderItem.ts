@@ -1,22 +1,22 @@
-import { Decimal } from '@prisma/client/runtime';
+import { Prisma } from '@prisma/client';
 
 export default class PurchaseOrderItem {
-  public id: string;
+  public id: string | undefined;
 
   public product_id: string;
 
-  public purchase_order_id: string;
-
   public quantity: number;
 
-  public price: Decimal;
+  public purchase_order_id: string;
+
+  public price: Prisma.Decimal;
 
   constructor(
-    id: string,
+    id: string | undefined,
     product_id: string,
-    purchase_order_id: string,
     quantity: number,
-    price: Decimal
+    purchase_order_id: string,
+    price: Prisma.Decimal
   ) {
     this.id = id;
     this.product_id = product_id;

@@ -1,9 +1,9 @@
 export default class PurchaseOrder {
-  public id: string;
+  public id?: string | undefined;
 
   public user_id: string;
 
-  public date: Date;
+  public date?: Date | undefined;
 
   constructor(id: string, user_id: string, date: Date) {
     this.id = id;
