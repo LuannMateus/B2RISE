@@ -22,6 +22,8 @@ model Product {
   category String @db.VarChar(50)
 
   image String @db.VarChar(200)
+
+  purchase_order_item PurchaseOrderItem[]
 }
 
 model User {
@@ -48,4 +50,22 @@ model PurchaseOrder {
   date DateTime @default(now())
 
   user User @relation( fields: [user_id], references: [id])
+
+  purchase_order_item PurchaseOrderItem[]
+}
+
+model PurchaseOrderItem {
+  id String @id @default(uuid())
+
+  product_id String
+
+  purchase_order_id String
+
+  quantity Int
+
+  price Decimal @db.Decimal(15, 2)
+
+  product Product @relation(fields: [product_id], references: [id])
+
+  purchase_order PurchaseOrder  @relation(fields: [purchase_order_id], references: [id])
 }
