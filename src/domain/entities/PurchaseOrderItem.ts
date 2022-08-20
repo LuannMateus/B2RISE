@@ -1,3 +1,5 @@
+import { Decimal } from '@prisma/client/runtime';
+
 export default class PurchaseOrderItem {
   public id: string;
 
@@ -7,14 +9,14 @@ export default class PurchaseOrderItem {
 
   public quantity: number;
 
-  public price: number;
+  public price: Decimal;
 
   constructor(
     id: string,
     product_id: string,
     purchase_order_id: string,
     quantity: number,
-    price: number
+    price: Decimal
   ) {
     this.id = id;
     this.product_id = product_id;

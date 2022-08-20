@@ -1,6 +1,6 @@
 import express, { Application } from 'express';
 
-import { ProductRouter, UserRouter } from './routes';
+import { ProductRouter, PurchaseRouter, UserRouter } from './routes';
 
 export default class App {
   private app: Application;
@@ -22,6 +22,7 @@ export default class App {
   private routes(): void {
     this.app.use('/api/v1', ProductRouter);
     this.app.use('/api/v1', UserRouter);
+    this.app.use('/api/v1', PurchaseRouter);
   }
 
   public get getApp(): Application {
