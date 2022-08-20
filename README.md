@@ -35,7 +35,7 @@ Também seria muito legal se você também implementasse:
 - [x] Gerenciamento de usuários (criação, deleção, atualização, leitura)
 - [x] Geração de pedido de compras com produtos selecionados
 - [x] Histórico de pedidos
-- [ ] Permitir filtrar pedidos gerados
+- [x] Permitir filtrar pedidos gerados
 
 <br />
 
