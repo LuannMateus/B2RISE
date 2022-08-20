@@ -36,4 +36,16 @@ model User {
   first_name String @db.VarChar(50)
 
   last_name String @db.VarChar(50)
+
+  purchaseOrder PurchaseOrder[]
+}
+
+model PurchaseOrder {
+  id String @id @default(uuid())
+
+  user_id String
+
+  date DateTime @default(now())
+
+  user User @relation( fields: [user_id], references: [id])
 }
