@@ -35,6 +35,34 @@ export class PurchaseRepository implements IPurchaseRepository {
     throw new Error('Method not implemented.');
   }
 
+  async findPurchaseHistory(userId: string): Promise<PurchaseOrder[]> {
+    try {
+      return await prisma.purchaseOrder.findMany({
+        include: {
+          purchase_order_item: true,
+        },
+        where: {
+          user_id: userId,
+        },
+      });
+    } catch (error) {
+      if (error instanceof PrismaNotFoundError) {
+        throw new NotFoundError();
+      } else if (error instanceof PrismaBadRequestError) {
+        throw new BadRequestError();
+      } else if (error instanceof PrismaClientKnownRequestError) {
+        switch (error.code) {
+          case 'P2003':
+            throw new BadRequestError('Invalid Foreign Key');
+          default:
+            throw new ServerError();
+        }
+      } else {
+        throw new ServerError();
+      }
+    }
+  }
+
   async save(purchase: PurchaseOrderItem): Promise<void> {
     try {
       await prisma.purchaseOrderItem.create({

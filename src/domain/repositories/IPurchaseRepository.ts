@@ -13,6 +13,8 @@ export interface IPurchaseRepository {
 
   findById(id: string): Promise<PurchaseOrderItem>;
 
+  findPurchaseHistory(userId: string): Promise<PurchaseOrder[]>;
+
   save(purchase: PurchaseOrderItem): Promise<void>;
 
   savePurchaseOrder(purchaseOrder: PurchaseOrder): Promise<PurchaseOrder>;
