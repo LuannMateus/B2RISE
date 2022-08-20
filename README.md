@@ -32,7 +32,7 @@ O desafio será implementar uma **API** de e-commerce para venda de camisetas, c
 
 Também seria muito legal se você também implementasse:
 
-- [ ] Gerenciamento de usuários (criação, deleção, atualização, leitura)
+- [x] Gerenciamento de usuários (criação, deleção, atualização, leitura)
 - [ ] Geração de pedido de compras com produtos selecionados
 - [ ] Histórico de pedidos
 - [ ] Permitir filtrar pedidos gerados
