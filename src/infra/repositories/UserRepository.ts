@@ -28,16 +28,28 @@ export class UserRepository implements IUserRepository {
     }
   }
 
-  findById(id: string): Promise<User> {
+  async findById(id: string): Promise<User> {
+    try {
+      return await prisma.user.findUniqueOrThrow({
+        where: { id },
+      });
+    } catch (error) {
+      if (error instanceof PrismaNotFoundError) {
+        throw new NotFoundError();
+      } else if (error instanceof PrismaBadRequestError) {
+        throw new BadRequestError();
+      } else {
+        throw new ServerError();
+      }
+    }
+  }
+  async save(user: User): Promise<void> {
     throw new Error('Method not implemented.');
   }
-  save(user: User): Promise<void> {
+  async updateById(id: string, user: User): Promise<User> {
     throw new Error('Method not implemented.');
   }
-  updateById(id: string, user: User): Promise<User> {
-    throw new Error('Method not implemented.');
-  }
-  deleteById(id: string): Promise<void> {
+  async deleteById(id: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
 }
