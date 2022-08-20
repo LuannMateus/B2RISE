@@ -23,3 +23,17 @@ model Product {
 
   image String @db.VarChar(200)
 }
+
+model User {
+  id String @id @default(uuid())
+
+  email String @db.VarChar(100)
+
+  username String @db.VarChar(50)
+
+  password String @db.VarChar(50)
+
+  first_name String @db.VarChar(50)
+
+  last_name String @db.VarChar(50)
+}
