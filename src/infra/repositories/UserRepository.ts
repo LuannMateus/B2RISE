@@ -59,7 +59,27 @@ export class UserRepository implements IUserRepository {
     }
   }
   async updateById(id: string, user: User): Promise<User> {
-    throw new Error('Method not implemented.');
+    try {
+      return await prisma.user.update({
+        data: user,
+        where: { id },
+      });
+    } catch (error) {
+      if (error instanceof PrismaNotFoundError) {
+        throw new NotFoundError();
+      } else if (error instanceof PrismaBadRequestError) {
+        throw new BadRequestError();
+      } else if (error instanceof PrismaClientKnownRequestError) {
+        switch (error.code) {
+          case 'P2025':
+            throw new NotFoundError('User does not exists!');
+          default:
+            throw new ServerError();
+        }
+      } else {
+        throw new ServerError();
+      }
+    }
   }
   async deleteById(id: string): Promise<void> {
     throw new Error('Method not implemented.');
