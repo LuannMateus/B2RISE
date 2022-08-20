@@ -1,5 +1,5 @@
 export default class User {
-  public id: string;
+  public id: string | undefined;
 
   public email: string;
 
@@ -12,7 +12,7 @@ export default class User {
   public last_name: string;
 
   constructor(
-    id: string,
+    id: string | undefined,
     email: string,
     username: string,
     password: string,

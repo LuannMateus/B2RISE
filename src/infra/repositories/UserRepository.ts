@@ -44,7 +44,19 @@ export class UserRepository implements IUserRepository {
     }
   }
   async save(user: User): Promise<void> {
-    throw new Error('Method not implemented.');
+    try {
+      await prisma.user.create({
+        data: user,
+      });
+    } catch (error) {
+      if (error instanceof PrismaNotFoundError) {
+        throw new NotFoundError();
+      } else if (error instanceof PrismaBadRequestError) {
+        throw new BadRequestError();
+      } else {
+        throw new ServerError();
+      }
+    }
   }
   async updateById(id: string, user: User): Promise<User> {
     throw new Error('Method not implemented.');
