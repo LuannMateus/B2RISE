@@ -1,20 +1,20 @@
-import { DeleteProductById } from '../../../../../src/domain/usecases/Product/DeleteProductById';
-import { ProductRepository } from '../../../../../src/infra/repositories/ProductRepository';
+import { DeleteUserById } from '../../../../../src/domain/usecases/User/DeleteUserById';
+import { UserRepository } from '../../../../../src/infra/repositories/UserRepository';
 import { ServerError } from '../../../../../src/presentation/errors';
 
-describe('Delete Product By Id', () => {
+describe('Delete User By Id', () => {
   const makeSut = () => {
-    const productRepository = new ProductRepository();
-    return new DeleteProductById(productRepository);
+    const productRepository = new UserRepository();
+    return new DeleteUserById(productRepository);
   };
 
   const sut = makeSut();
 
   const mockId = 'VALID ID';
 
-  it('Should delete a product by id when success', async () => {
+  it('Should delete an user by id when success', async () => {
     jest
-      .spyOn(ProductRepository.prototype, 'deleteById')
+      .spyOn(UserRepository.prototype, 'deleteById')
       .mockImplementation(() => {
         return Promise.resolve();
       });
@@ -24,7 +24,7 @@ describe('Delete Product By Id', () => {
 
   it('Should throw an error when failed', async () => {
     jest
-      .spyOn(ProductRepository.prototype, 'deleteById')
+      .spyOn(UserRepository.prototype, 'deleteById')
       .mockImplementation(() => {
         throw new ServerError();
       });

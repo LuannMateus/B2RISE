@@ -6,7 +6,7 @@ import { FindProductsByFilter } from '../../../../../src/domain/usecases/Product
 import { ProductRepository } from '../../../../../src/infra/repositories/ProductRepository';
 import { BadRequestError } from '../../../../../src/presentation/errors';
 
-describe('Find Product By Id', () => {
+describe('Find Product By Filter', () => {
   const makeSut = () => {
     const productRepository = new ProductRepository();
     return new FindProductsByFilter(productRepository);
