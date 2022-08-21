@@ -46,7 +46,7 @@ Também seria muito legal se você também implementasse:
 - [x] Utilizar clean architecture
 - [x] Utilizar docker
 - [ ] Implementar o projeto utilizando SAP CAP
-- [ ] Testes unitários
+- [x] Testes unitários
 - [ ] Testes de integração
 - [ ] Testes de stress
 - [ ] Testes e2e
@@ -57,4 +57,4 @@ Também seria muito legal se você também implementasse:
 
 # 📊 Diagrama Entidade-Relacionamento
 
-![image](https://user-images.githubusercontent.com/59940855/185507718-ed8e5bbc-49da-43ec-af9c-e4e7c94d5510.png)
+![image](https://user-images.githubusercontent.com/59940855/185805457-47acdb92-1c19-4fff-a394-8f15dd048bf4.png)
