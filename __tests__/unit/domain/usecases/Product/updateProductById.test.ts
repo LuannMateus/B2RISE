@@ -3,7 +3,7 @@ import { Prisma } from '@prisma/client';
 import Product from '../../../../../src/domain/entities/Product';
 import { UpdateProductById } from '../../../../../src/domain/usecases/Product/UpdateProductById';
 import { ProductRepository } from '../../../../../src/infra/repositories/ProductRepository';
-import { NotFoundError } from '../../../../../src/presentation/errors';
+import { ServerError } from '../../../../../src/presentation/errors';
 
 describe('Update Product', () => {
   const makeSut = () => {
@@ -44,11 +44,11 @@ describe('Update Product', () => {
     jest
       .spyOn(ProductRepository.prototype, 'updateById')
       .mockImplementation(() => {
-        throw new NotFoundError();
+        throw new ServerError();
       });
 
     expect(sut.execute(mockId, valueToUpdate)).rejects.toThrow(
-      new NotFoundError()
+      new ServerError()
     );
   });
 });
