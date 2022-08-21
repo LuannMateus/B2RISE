@@ -5,8 +5,8 @@ import { ServerError } from '../../../../../src/presentation/errors';
 
 describe('Save User', () => {
   const makeSut = () => {
-    const productRepository = new UserRepository();
-    return new SaveUser(productRepository);
+    const userRepository = new UserRepository();
+    return new SaveUser(userRepository);
   };
 
   const sut = makeSut();

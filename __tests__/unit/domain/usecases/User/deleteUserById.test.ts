@@ -4,8 +4,8 @@ import { ServerError } from '../../../../../src/presentation/errors';
 
 describe('Delete User By Id', () => {
   const makeSut = () => {
-    const productRepository = new UserRepository();
-    return new DeleteUserById(productRepository);
+    const userRepository = new UserRepository();
+    return new DeleteUserById(userRepository);
   };
 
   const sut = makeSut();

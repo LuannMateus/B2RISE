@@ -5,8 +5,8 @@ import { ServerError } from '../../../../../src/presentation/errors';
 
 describe('Find All Users', () => {
   const makeSut = () => {
-    const productRepository = new UserRepository();
-    return new FindAllUsers(productRepository);
+    const userRepository = new UserRepository();
+    return new FindAllUsers(userRepository);
   };
 
   const sut = makeSut();

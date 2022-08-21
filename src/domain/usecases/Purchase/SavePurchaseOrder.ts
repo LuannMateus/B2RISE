@@ -1,7 +1,7 @@
 import PurchaseOrder from '../../../domain/entities/PurchaseOrder';
 import { IPurchaseRepository } from '../../repositories/IPurchaseRepository';
 
-export class SavePurchase {
+export class SavePurchaseOrder {
   constructor(private readonly purchaseRepository: IPurchaseRepository) {}
 
   async execute(purchaseOrder: PurchaseOrder): Promise<PurchaseOrder> {

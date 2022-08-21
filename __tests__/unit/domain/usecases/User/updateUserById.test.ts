@@ -5,8 +5,8 @@ import { ServerError } from '../../../../../src/presentation/errors';
 
 describe('Update User By Id', () => {
   const makeSut = () => {
-    const productRepository = new UserRepository();
-    return new UpdateUserById(productRepository);
+    const userRepository = new UserRepository();
+    return new UpdateUserById(userRepository);
   };
 
   const sut = makeSut();

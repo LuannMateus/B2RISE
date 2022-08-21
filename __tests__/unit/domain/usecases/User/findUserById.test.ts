@@ -5,8 +5,8 @@ import { NotFoundError } from '../../../../../src/presentation/errors';
 
 describe('Find User By Id', () => {
   const makeSut = () => {
-    const productRepository = new UserRepository();
-    return new FindUserById(productRepository);
+    const userRepository = new UserRepository();
+    return new FindUserById(userRepository);
   };
 
   const sut = makeSut();
