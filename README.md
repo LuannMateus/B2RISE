@@ -9,6 +9,7 @@ Bem-vindo(a) ao meu projeto do desafio Backend!
 - [Manual de Instalação](#manual)
 - [Tarefas](#tasks)
 - [Extras](#extras)
+- [Rotas](#routes)
 - [Diagrama ER (Entidade-Relacionamento)](#diagram)
 
 <br />
@@ -16,6 +17,10 @@ Bem-vindo(a) ao meu projeto do desafio Backend!
 <a id="manual"></a>
 
 # 📔 Manual de Instalação
+
+- Primeiro execute o comando `chmod +x entrypoint.sh` para dar permissão de execução no arquivo de script que está no diretório .docker;
+
+- Após dar permissão ao arquivo entrypoint, execute o container docker por meio do comando `docker-compose up -d` no diretório .docker, onde está localizado o docker-compose.yaml.
 
 <br />
 
@@ -50,6 +55,32 @@ Também seria muito legal se você também implementasse:
 - [ ] Testes de integração
 - [ ] Testes de stress
 - [ ] Testes e2e
+
+<br />
+
+<a id="routes"></a>
+
+# 📝 Rotas
+
+- Produto
+  - GET   | FIND ALL - `/api/v1/products`: busca todos os produtos;
+  - GET   | FIND BY ID - `/api/v1/products/:id`: busca um produto por id;
+  - GET   | FIND MANY BY FILTER - `/api/v1/products/filters?category=value&title=value&page=1&limit=10`: busca produtos por fitro de categoria e título com possiblidade de paginação;
+  - POST  | SAVE - `/api/v1/products`: salva um produto;
+  - PATCH | UPDATE BY ID - `/api/v1/products/:id`: atualiza um produto;
+  - DEL   | DELETE BY ID - `/api/v1/products/:id`: deleta um produto.
+
+- Usuário
+  - GET   | FIND ALL - `/api/v1/users`: busca todos os usuários;
+  - GET   | FIND BY ID - `/api/v1/users/:id`: busca um usuário por id;
+  - POST  | SAVE - `/api/v1/users`: salva um usuário;
+  - PATCH | UPDATE BY ID - `/api/v1/users/:id`: atualiza um usuário;
+  - DEL   | DELETE BY ID - `/api/v1/users/:id`: deleta um usuário.
+
+- Pedido
+  - GET   | FIND ALL - `/api/v1/purchases`: busca todas as ordens de pedido;
+  - GET   | FIND HISTORY - `/api/v1/purchases/history/:id?category=value&title=value`: busca pedidos por usuário com posssiblidade de fitro de categoria e título;
+  - POST  | SAVE - `/api/v1/purchases`: salva um pedido.
 
 <br />
 
