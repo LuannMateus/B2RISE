@@ -14,7 +14,7 @@ export default class FindPurchaseHistoryByUserController {
 
     const { id: userId } = req.params as { id: string };
 
-    const { category, title, day, month, year } = Object.create(
+    const { category, title } = Object.create(
       req.query
     ) as PurchaseFilter;
 
@@ -22,9 +22,6 @@ export default class FindPurchaseHistoryByUserController {
       const purchases = await findPurchaseHistoryByUserUsecase.execute(userId, {
         category,
         title,
-        day,
-        month,
-        year,
       });
 
       return res.status(200).json(purchases);

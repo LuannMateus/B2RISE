@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+  app:
+    build: ../
+    entrypoint: .docker/entrypoint.sh
+    container_name: e-commerce
+    ports:
+      - 3000:3000
+    volumes:
+      - ../:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - app-network
+    depends_on:
+      - 'db'
+
   db:
     image: postgres:14.1-alpine
     restart: always
@@ -13,7 +27,7 @@ services:
     volumes:
       - ./pg_data:/var/lib/postgresql
     networks:
-      - postgres-compose-network
+      - app-network
 
   pgAdmin:
     image: dpage/pgadmin4
@@ -25,8 +39,8 @@ services:
     depends_on:
       - db
     networks:
-      - postgres-compose-network
+      - app-network
 
 networks:
-  postgres-compose-network:
+  app-network:
     driver: bridge

@@ -11,9 +11,6 @@ export type Purchase = {
 export type PurchaseFilter = {
   category: string;
   title: string;
-  day: number;
-  month: number;
-  year: number;
 };
 
 export interface IPurchaseRepository {
